@@ -2,19 +2,23 @@ require 'minitest/autorun'
 require_relative 'bowling_game'
 
 class BowlingGameTest < MiniTest::Unit::TestCase
+  def setup
+    @game = BowlingGame.new
+  end
+
   def test_all_gutter_game
-    game = BowlingGame.new
-    20.times do
-      game.record_shot(0)
-    end
-    assert_equal 0, game.score
+    record_many_shots(20, 0)
+    assert_equal 0, @game.score
   end
 
   def test_all_1pin_game
-    game = BowlingGame.new
-    20.times do
-      game.record_shot(1)
+    record_many_shots(20, 1)
+    assert_equal 20, @game.score
+  end
+
+  def record_many_shots(count, pins)
+    count.times do
+      @game.record_shot(pins)
     end
-    assert_equal 20, game.score
   end
 end
