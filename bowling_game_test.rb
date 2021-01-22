@@ -38,8 +38,17 @@ class BowlingGameTest < MiniTest::Unit::TestCase
     @game.record_shot(3)
     @game.record_shot(3)
     @game.record_shot(1)
-    record_many_shots(15, 0) #全体では15投になる
+    record_many_shots(15, 0) #全体では19投になる
     assert_equal 23, @game.score
+  end
+
+  def test_get_double
+    @game.record_shot(10) #10 + 10 + 3
+    @game.record_shot(10) #10 + 3 + 1
+    @game.record_shot(3)
+    @game.record_shot(1)
+    record_many_shots(14, 0) #全体では18投になる
+    assert_equal 41, @game.score
   end
 
   def record_many_shots(count, pins)
