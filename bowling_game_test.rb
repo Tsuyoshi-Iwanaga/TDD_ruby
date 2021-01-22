@@ -24,6 +24,15 @@ class BowlingGameTest < MiniTest::Unit::TestCase
     assert_equal 18, @game.score
   end
 
+  def test_spare_is_madeup_only_evenshot
+    @game.record_shot(2)
+    @game.record_shot(5)
+    @game.record_shot(5) #直前の投球との合計は10だがフレームが異なるのでスペアではない
+    @game.record_shot(1)
+    record_many_shots(16, 0)
+    assert_equal 13, @game.score
+  end
+
   def record_many_shots(count, pins)
     count.times do
       @game.record_shot(pins)

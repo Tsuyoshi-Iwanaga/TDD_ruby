@@ -3,6 +3,7 @@ class BowlingGame
     @score = 0
     @spare = false
     @lastpins = 0
+    @shot_no = 1
   end
 
   def record_shot(pins)
@@ -13,11 +14,17 @@ class BowlingGame
       @spare = false
     end
 
-    if @lastpins + pins == 10
+    if @shot_no == 2 && @lastpins + pins == 10
       @spare = true
     end
 
     @lastpins = pins
+
+    if(@shot_no == 1)
+      @shot_no = 2
+    else
+      @shot_no = 1
+    end
   end
 
   def score
