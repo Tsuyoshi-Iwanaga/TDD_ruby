@@ -20,6 +20,10 @@ class BowlingGame
     @score
   end
 
+  def frame_score(frame_no)
+    0
+  end
+
   private
 
   def proceed_next_shot
