@@ -44,4 +44,12 @@ class FrameTest < MiniTest::Unit::TestCase
     frame.record_shot(10)
     assert frame.strike?, "1投目に10ピン倒しているのでストライク"
   end
+
+  def test_add_bonus
+    frame = Frame.new
+    frame.record_shot(5)
+    frame.record_shot(5)
+    frame.add_bonus(5)
+    assert_equal 15, frame.score
+  end
 end
