@@ -31,22 +31,11 @@ class BowlingGame
   end
 
   def calc_strike_bonus(pins)
-    if @strike_bornus_count > 0
-      @score += pins
-      @strike_bornus_count -= 1
-    end
+    add_strike_bonus(pins)
+    add_double_bonus(pins)
 
-    if @double_bornus_count > 0
-      @score += pins
-      @double_bornus_count -= 1
-    end
-
-    if pins == 10
-      if @strike_bornus_count == 0
-        @strike_bornus_count = 2
-      else
-        @double_bornus_count = 2
-      end
+    if strike?(pins)
+      recognize_strike_bonus
     end
   end
 
@@ -56,8 +45,38 @@ class BowlingGame
       @spare = false
     end
 
-    if @shot_no == 2 && @lastpins + pins == 10
+    if spare?(pins)
       @spare = true
+    end
+  end
+
+  def spare?(pins)
+    @shot_no == 2 && @lastpins + pins == 10
+  end
+
+  def strike?(pins)
+    pins == 10
+  end
+
+  def recognize_strike_bonus
+    if @strike_bornus_count == 0
+      @strike_bornus_count = 2
+    else
+      @double_bornus_count = 2
+    end
+  end
+
+  def add_strike_bonus(pins)
+    if @strike_bornus_count > 0
+      @score += pins
+      @strike_bornus_count -= 1
+    end
+  end
+
+  def add_double_bonus(pins)
+    if @double_bornus_count > 0
+      @score += pins
+      @double_bornus_count -= 1
     end
   end
 end
