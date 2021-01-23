@@ -14,6 +14,6 @@ class Frame
   end
 
   def finished?
-    @shot_count > 1
+    @score >= 10 || @shot_count > 1
   end
 end

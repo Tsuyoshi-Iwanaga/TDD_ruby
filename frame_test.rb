@@ -23,4 +23,10 @@ class FrameTest < MiniTest::Unit::TestCase
     frame.record_shot(1)
     assert frame.finished?, "2投したので終了"
   end
+
+  def test_finish_frame_get_strike
+    frame = Frame.new
+    frame.record_shot(10)
+    assert frame.finished?, "10ピン倒したので終了"
+  end
 end
