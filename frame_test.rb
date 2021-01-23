@@ -29,4 +29,19 @@ class FrameTest < MiniTest::Unit::TestCase
     frame.record_shot(10)
     assert frame.finished?, "10ピン倒したので終了"
   end
+
+  def test_when_spare_on_second_shot_in_frame
+    frame = Frame.new
+    frame.record_shot(5)
+    refute frame.spare?, "1投目なのでスペアではない"
+    frame.record_shot(5)
+    assert frame.spare?, "2投目かつ10ピンになったのでスペア"
+  end
+
+  def test_when_strike_in_frame
+    frame = Frame.new
+    refute frame.strike?, "投げる前はストライクにはならない"
+    frame.record_shot(10)
+    assert frame.strike?, "1投目に10ピン倒しているのでストライク"
+  end
 end

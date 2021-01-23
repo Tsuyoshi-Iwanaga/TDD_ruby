@@ -16,4 +16,12 @@ class Frame
   def finished?
     @score >= 10 || @shot_count > 1
   end
+
+  def spare?
+    @score >= 10 && @shot_count > 1
+  end
+
+  def strike?
+    @score >= 10 && @shot_count == 1
+  end
 end
