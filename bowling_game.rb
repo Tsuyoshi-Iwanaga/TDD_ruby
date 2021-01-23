@@ -23,7 +23,7 @@ class BowlingGame
   private
 
   def proceed_next_shot
-    if(@shot_no == 1)
+    if(@shot_no == 1 && @strike_bornus_count < 2 && @double_bornus_count < 2)
       @shot_no = 2
     else
       @shot_no = 1

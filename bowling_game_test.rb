@@ -61,6 +61,26 @@ class BowlingGameTest < MiniTest::Unit::TestCase
     assert_equal 71, @game.score
   end
 
+
+  def test_composite_case_spare_strike
+    @game.record_shot(10) # 10 + 5 + 5
+    @game.record_shot(5)
+    @game.record_shot(5) # 5 + 3
+    @game.record_shot(3)
+    record_many_shots(15, 0) #全体では19投になる
+    assert_equal 36, @game.score
+  end
+
+  def test_composite_case_spare_double
+    @game.record_shot(10) # 10 + 10 + 5
+    @game.record_shot(10) # 10 + 5 + 5
+    @game.record_shot(5)
+    @game.record_shot(5) # 5 + 3
+    @game.record_shot(3)
+    record_many_shots(13, 0) #全体では18投になる
+    assert_equal 61, @game.score
+  end
+
   def record_many_shots(count, pins)
     count.times do
       @game.record_shot(pins)
