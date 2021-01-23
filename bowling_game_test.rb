@@ -86,6 +86,14 @@ class BowlingGameTest < MiniTest::Unit::TestCase
     assert_equal 0, @game.frame_score(1)
   end
 
+  def test_all_shots_get_1pin_all_frame_score_2
+    record_many_shots(20, 1)
+    10.times do |i|
+      frame_no = i + 1
+      assert_equal 2, @game.frame_score(frame_no)
+    end
+  end
+
   def record_many_shots(count, pins)
     count.times do
       @game.record_shot(pins)

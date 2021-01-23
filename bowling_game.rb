@@ -8,16 +8,20 @@ class BowlingGame
     @shot_no = 1
     @strike_bornus_count = 0
     @double_bornus_count = 0
-    @frame = Frame.new
+    @frames = [ Frame.new ]
   end
 
   def record_shot(pins)
-    @frame.record_shot(pins)
+    frame = @frames.last
+    frame.record_shot(pins)
     @score += pins
     calc_spare_bonus(pins)
     calc_strike_bonus(pins)
     @lastpins = pins
     proceed_next_shot
+    if frame.finished?
+      @frames << Frame.new
+    end
   end
 
   def score
@@ -25,7 +29,7 @@ class BowlingGame
   end
 
   def frame_score(frame_no)
-    @frame.score
+    @frames[frame_no - 1].score
   end
 
   private
