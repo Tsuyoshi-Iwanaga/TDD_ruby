@@ -1,3 +1,5 @@
+require_relative 'frame'
+
 class BowlingGame
   def initialize
     @score = 0
@@ -6,9 +8,11 @@ class BowlingGame
     @shot_no = 1
     @strike_bornus_count = 0
     @double_bornus_count = 0
+    @frame = Frame.new
   end
 
   def record_shot(pins)
+    @frame.record_shot(pins)
     @score += pins
     calc_spare_bonus(pins)
     calc_strike_bonus(pins)
@@ -21,7 +25,7 @@ class BowlingGame
   end
 
   def frame_score(frame_no)
-    0
+    @frame.score
   end
 
   private
