@@ -22,6 +22,7 @@ class BowlingGameTest < MiniTest::Unit::TestCase
     @game.record_shot(4)
     record_many_shots(17, 0)
     assert_equal 18, @game.score
+    assert_equal 14, @game.frame_score(1), "frame:1"
   end
 
   def test_spare_is_madeup_only_evenshot
@@ -40,6 +41,7 @@ class BowlingGameTest < MiniTest::Unit::TestCase
     @game.record_shot(1)
     record_many_shots(15, 0) #全体では19投になる
     assert_equal 23, @game.score
+    assert_equal 16, @game.frame_score(1), "frame:1"
   end
 
   def test_get_double
@@ -49,6 +51,8 @@ class BowlingGameTest < MiniTest::Unit::TestCase
     @game.record_shot(1)
     record_many_shots(14, 0) #全体では18投になる
     assert_equal 41, @game.score
+    assert_equal 23, @game.frame_score(1), "frame:1"
+    assert_equal 14, @game.frame_score(2), "frame:2"
   end
 
   def test_get_turkey
